@@ -350,7 +350,7 @@ appendEscapedJsonLiteral addr =
 
 appendEscapedJsonText :: Text -> BufferBuilder ()
 appendEscapedJsonText !(Text arr ofs len) =
-    let byteArray = aBA arr
+    let (ByteArray byteArray) = arr
     in withHandle $ \h ->
         bw_append_json_escaped_utf16 h len (Ptr (byteArrayContents# byteArray) `plusPtr` (2 * ofs))
 {-# INLINE appendEscapedJsonText #-}
